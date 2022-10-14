@@ -1,6 +1,6 @@
 import random
 
-from bke import MLAgent, is_winner, opponent, RandomAgent, train_and_plot, EvaluationAgent, start, train, save
+from bke import MLAgent, is_winner, opponent, RandomAgent, train_and_plot, EvaluationAgent, start, train, save, load
 
 
 class MyRandomAgent(EvaluationAgent):
@@ -19,7 +19,7 @@ class MyAgent(MLAgent):
         else:
             reward = 0
         return reward
-        my_agent = MyAgent()
+
        
 
 
@@ -59,16 +59,18 @@ while loop:
     elif choice == 2:
         print("Player vs Noob bot has been selected")
         my_random_agent = MyRandomAgent()
-        start(player_o=my_random_agent, player_x=my_random_agent)
+        start(player_o=my_random_agent)
     elif choice == 3:
         print("Bot trainen has been selected")
         my_agent = MyAgent()
-        train(my_agent, 3000)
- 
+        train(my_agent,3000)
         save(my_agent, 'MyAgent_3000')
     elif choice == 4:
         print("Player vs Smart bot has been selected")
-        start(player_o= 'MyAgent_3000')
+        my_agent = MyAgent()
+        my_agent = load('MyAgent_3000')
+         
+        start(player_x=my_agent)
     elif choice == 5:
         print("validatie grafieken plotten has been selected")
         TrainenEnPlotten()
@@ -78,6 +80,5 @@ while loop:
 
 random.seed(1)
 
-my_agent = MyAgent()
-random_agent = RandomAgent()
+
 
